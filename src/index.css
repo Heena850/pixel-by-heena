@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --color-pastel-sky: #e0f2fe;
+  --color-pastel-purple: #f3e5f5;
+  --color-pastel-blue: #e8eaf6;
+  --color-pastel-mint: #e0f2f1;
+  --color-pastel-peach: #fff3e0;
+  --color-pastel-lavender: #ede7f6;
+  --color-primary: #7c3aed;
+  --color-primary-light: #a78bfa;
+  --color-secondary: #06b6d4;
+  --color-accent: #14b8a6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Avatar animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.15); opacity: 0.15; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Hero background effects */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, -40px) scale(1.1); }
+  50% { transform: translate(-30px, 50px) scale(0.95); }
+  75% { transform: translate(-60px, -20px) scale(1.05); }
+}
+
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-50px, 30px) scale(1.08); }
+  50% { transform: translate(40px, -60px) scale(0.9); }
+  75% { transform: translate(20px, 40px) scale(1.12); }
+}
+
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  33% { transform: translate(70px, 30px) scale(0.95); }
+  66% { transform: translate(-40px, -50px) scale(1.1); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.5); }
+}
+
+.animate-blob-1 { animation: blob-drift-1 12s ease-in-out infinite; }
+.animate-blob-2 { animation: blob-drift-2 15s ease-in-out infinite; }
+.animate-blob-3 { animation: blob-drift-3 18s ease-in-out infinite; }
+.animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
