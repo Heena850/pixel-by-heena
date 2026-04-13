@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-sm"
+          ? "bg-gray-900/80 backdrop-blur-md shadow-sm shadow-black/20"
           : "bg-transparent"
       }`}
     >
@@ -31,9 +31,9 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#home"
-            className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
           >
-            {"<Dev />"}
+            {"<Front + Vibe />"}
           </a>
 
           {/* Desktop nav */}
@@ -44,8 +44,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   scrolled
-                    ? "text-gray-600 hover:text-primary hover:bg-pastel-purple/50"
-                    : "text-gray-700 hover:text-primary hover:bg-white/30"
+                    ? "text-gray-400 hover:text-white hover:bg-gray-800"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {link.label}
@@ -58,8 +58,8 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className={`md:hidden p-2 rounded-xl transition-colors ${
               scrolled
-                ? "text-gray-600 hover:bg-pastel-purple/50"
-                : "text-gray-700 hover:bg-white/30"
+                ? "text-gray-400 hover:bg-gray-800"
+                : "text-gray-300 hover:bg-white/10"
             }`}
             aria-label="Toggle menu"
           >
@@ -97,7 +97,7 @@ export default function Navbar() {
       >
         <div
           className={`px-4 pb-4 space-y-1 backdrop-blur-md ${
-            scrolled ? "bg-white/95" : "bg-white/40"
+            scrolled ? "bg-gray-900/95" : "bg-gray-900/60"
           }`}
         >
           {navLinks.map((link) => (
@@ -105,7 +105,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2.5 rounded-xl text-sm font-medium text-gray-700 hover:text-primary hover:bg-white/50 transition-all duration-300"
+              className="block px-4 py-2.5 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-all duration-300"
             >
               {link.label}
             </a>

@@ -2,15 +2,15 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-10">
+    <footer className="bg-black text-white py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6" data-aos="fade-up">
           {/* Logo */}
           <a
             href="#home"
-            className="text-xl font-bold bg-gradient-to-r from-primary-light to-secondary bg-clip-text text-transparent"
+            className="text-xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
           >
-            {"<Dev />"}
+             {"<Front + Vibe />"}
           </a>
 
           {/* Nav links */}
@@ -66,7 +66,7 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8 text-center" data-aos="fade-up" data-aos-delay="200">
           <p className="text-gray-400 text-sm">
             Made with <span className="text-red-400">&#10084;&#65039;</span> by{" "}
-            <span className="text-white font-medium">Your Name</span>
+            <span className="text-white font-medium">Heena</span>
           </p>
           <p className="text-gray-500 text-xs mt-2">
             &copy; {currentYear} All rights reserved.

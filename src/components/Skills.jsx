@@ -38,36 +38,37 @@ const frontEndSkills = [
 ];
 
 const aiSkills = [
-  {
-    name: "Python",
-    level: 87,
+    {
+    name: "Lovable",
+    level: 90,
     icon: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#3776AB">
-        <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09-.33.22zM21.1 6.11l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01.21.03zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08-.33.23z" />
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#E11D48">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+      </svg>
+    ),
+  },
+    {
+    name: "Claude Code",
+    level: 92,
+    icon: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#D97706">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-1-1 4-4-4-4 1-1 5 5-5 5zm-4-2l-1-1 2-2-2-2 1-1 3 3-3 3z" />
       </svg>
     ),
   },
   {
-    name: "TensorFlow",
-    level: 78,
+    name: "Cursor AI",
+    level: 80,
     icon: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#FF6F00">
-        <path d="M1.292 5.856L11.54 0v24l-4.095-2.378V7.603l-3.079 1.79V4.577zm21.416 0L12.46 0v24l4.095-2.378V14.62l3.079-1.79v4.816L12.46 22.39V24l10.248-5.856z" />
+      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="#00D4AA" strokeWidth="2">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
   },
-  {
-    name: "PyTorch",
-    level: 75,
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8" fill="#EE4C2C">
-        <path d="M12.005 0L4.952 7.053a9.865 9.865 0 000 14.022 9.866 9.866 0 0014.022 0c3.874-3.874 3.874-10.148 0-14.022l-1.762 1.762a7.38 7.38 0 010 10.498 7.38 7.38 0 01-10.498 0 7.38 7.38 0 010-10.498l4.46-4.46.83-.83zm3.476 3.474a1.478 1.478 0 100 2.956 1.478 1.478 0 000-2.956z" />
-      </svg>
-    ),
-  },
+
   {
     name: "Prompt Eng.",
-    level: 85,
+    level: 92,
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -84,28 +85,30 @@ const aiSkills = [
       </svg>
     ),
   },
+
 ];
 
 function SkillCard({ skill, index }) {
   return (
     <div
-      className="group p-5 bg-white rounded-2xl shadow-sm hover:shadow-xl hover:shadow-primary/10 border border-gray-100 hover:border-primary/20 transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02]"
+      className="group p-5 bg-gray-900 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-white/5 border border-gray-800 hover:border-gray-600 hover:-translate-y-2 hover:scale-[1.02]"
+      style={{ transition: "0.3s ease-in-out" }}
       data-aos="fade-up"
       data-aos-delay={index * 100}
     >
       <div className="flex items-center gap-4 mb-3">
-        <div className="p-2.5 bg-pastel-lavender/50 rounded-xl group-hover:bg-pastel-lavender group-hover:scale-110 transition-all duration-500 ease-out">
+        <div className="p-2.5 bg-gray-800 rounded-xl group-hover:bg-gray-700 group-hover:scale-110 transition-all duration-500 ease-out">
           {skill.icon}
         </div>
         <div className="flex-1">
-          <h4 className="font-semibold text-gray-800">{skill.name}</h4>
-          <span className="text-sm text-gray-400">{skill.level}%</span>
+          <h4 className="font-semibold text-white">{skill.name}</h4>
+          <span className="text-sm text-gray-500">{skill.level}%</span>
         </div>
       </div>
       {/* Progress bar */}
-      <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+      <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-white to-gray-400 transition-all duration-1000 ease-out"
           style={{ width: `${skill.level}%` }}
         />
       </div>
@@ -115,28 +118,28 @@ function SkillCard({ skill, index }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-pastel-blue/30 to-white">
+    <section id="skills" className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <span className="inline-block px-4 py-1.5 bg-pastel-mint rounded-full text-sm font-medium text-emerald-700 mb-4">
+          <span className="inline-block px-4 py-1.5 bg-gray-800 rounded-full text-sm font-medium text-gray-300 mb-4">
             My Skills
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">
             What I bring to the table
           </h2>
           <p className="text-gray-500 mt-3 max-w-lg mx-auto">
-            A unique blend of front-end craftsmanship and AI expertise
+            Crafting pixel-perfect UIs and shipping faster with AI-powered tools
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10">
           {/* Front-End Skills */}
-          <div data-aos="fade-up">
+          <div data-aos="fade-up" data-aos-delay="100">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-pastel-sky rounded-xl">
+              <div className="p-2 bg-gray-800 rounded-xl">
                 <svg
-                  className="w-6 h-6 text-sky-500"
+                  className="w-6 h-6 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -149,7 +152,7 @@ export default function Skills() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-800">
+              <h3 className="text-xl font-bold text-white">
                 Front-End Development
               </h3>
             </div>
@@ -161,11 +164,11 @@ export default function Skills() {
           </div>
 
           {/* AI Skills */}
-          <div data-aos="fade-up">
+          <div data-aos="fade-up" data-aos-delay="300">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-pastel-peach rounded-xl">
+              <div className="p-2 bg-gray-800 rounded-xl">
                 <svg
-                  className="w-6 h-6 text-orange-500"
+                  className="w-6 h-6 text-gray-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -178,8 +181,8 @@ export default function Skills() {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-800">
-                AI Development
+              <h3 className="text-xl font-bold text-white">
+                Vibe Coding & AI Tools
               </h3>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">

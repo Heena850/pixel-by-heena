@@ -3,12 +3,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+// import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import RobotSection from "./components/RobotSection";
 
 export default function App() {
   useEffect(() => {
@@ -21,9 +22,10 @@ export default function App() {
   }, []);
 
   return (
-    <div className="font-poppins antialiased text-gray-700">
+    <div className="font-poppins antialiased text-gray-300 bg-gray-950">
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
+      <RobotSection />
       <About />
       <Skills />
       <Projects />

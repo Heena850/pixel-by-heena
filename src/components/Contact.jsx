@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
+
+// TODO: Replace these with your actual EmailJS credentials
+// Get them from https://emailjs.com → Account → API Keys / Email Services / Email Templates
+const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
 export default function Contact() {
+  const formRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -13,23 +22,38 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Connect to your email service (EmailJS, Formspree, etc.)
-    alert("Thanks for your message! I'll get back to you soon.");
-    setFormData({ name: "", email: "", message: "" });
+    setStatus("sending");
+
+    emailjs
+      .sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      })
+      .catch(() => {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      });
   };
 
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-b from-white to-pastel-purple/30"
+      className="py-20 bg-gradient-to-b from-gray-950 to-gray-900"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <span className="inline-block px-4 py-1.5 bg-pastel-sky rounded-full text-sm font-medium text-sky-700 mb-4">
+          <span className="inline-block px-4 py-1.5 bg-gray-800 rounded-full text-sm font-medium text-gray-300 mb-4">
             Contact
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">
             Let's work together
           </h2>
           <p className="text-gray-500 mt-3 max-w-lg mx-auto">
@@ -40,8 +64,9 @@ export default function Contact() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact form */}
           <form
+            ref={formRef}
             onSubmit={handleSubmit}
-            className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8"
+            className="bg-gray-900 rounded-3xl shadow-sm border border-gray-800 p-8"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -49,7 +74,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
+                  className="block text-sm font-medium text-gray-300 mb-1.5"
                 >
                   Your Name
                 </label>
@@ -61,14 +86,14 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Jane Doe"
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-gray-500 transition-all duration-200"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
+                  className="block text-sm font-medium text-gray-300 mb-1.5"
                 >
                   Email Address
                 </label>
@@ -80,14 +105,14 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="jane@example.com"
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-gray-500 transition-all duration-200"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-1.5"
+                  className="block text-sm font-medium text-gray-300 mb-1.5"
                 >
                   Message
                 </label>
@@ -99,16 +124,37 @@ export default function Contact() {
                   required
                   rows={5}
                   placeholder="Tell me about your project..."
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-gray-500 transition-all duration-200 resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-xl shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
+                disabled={status === "sending"}
+                className="w-full py-3.5 bg-gradient-to-r from-violet-600 to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/30 hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
-                Send Message
+                {status === "sending" ? "Sending..." : "Send Message"}
               </button>
+
+              {/* Success message */}
+              {status === "success" && (
+                <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/20 rounded-xl text-green-400 text-sm">
+                  <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+
+              {/* Error message */}
+              {status === "error" && (
+                <div className="flex items-center gap-2 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">
+                  <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Something went wrong. Please try again or email me directly.
+                </div>
+              )}
             </div>
           </form>
 
@@ -124,9 +170,20 @@ export default function Contact() {
                     </svg>
                   ),
                   label: "Email",
-                  value: "your.email@example.com",
-                  href: "mailto:your.email@example.com",
-                  color: "bg-pastel-sky text-sky-600",
+                  value: "heenaparmar850@gmail.com",
+                  href: "mailto:heenaparmar850@gmail.com",
+                  color: "bg-gray-800 text-gray-400",
+                },
+                {
+                  icon: (
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  ),
+                  label: "Phone",
+                  value: "+91 76228 91070",
+                  href: "tel:+917622891070",
+                  color: "bg-gray-800 text-gray-400",
                 },
                 {
                   icon: (
@@ -136,29 +193,29 @@ export default function Contact() {
                     </svg>
                   ),
                   label: "Location",
-                  value: "Your City, Country",
+                  value: "Ahmedabad, India",
                   href: null,
-                  color: "bg-pastel-blue text-blue-600",
+                  color: "bg-gray-800 text-gray-400",
                 },
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="flex items-center gap-4 p-5 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-500 ease-out"
+                  className="flex items-center gap-4 p-5 bg-gray-900 rounded-2xl shadow-sm border border-gray-800 hover:shadow-lg hover:shadow-white/5 hover:-translate-y-1 hover:scale-[1.02] transition-all duration-500 ease-out"
                 >
                   <div className={`p-3 rounded-xl ${item.color}`}>
                     {item.icon}
                   </div>
                   <div>
-                    <div className="text-sm text-gray-400">{item.label}</div>
+                    <div className="text-sm text-gray-500">{item.label}</div>
                     {item.href ? (
                       <a
                         href={item.href}
-                        className="font-medium text-gray-800 hover:text-primary transition-colors"
+                        className="font-medium text-white hover:text-gray-300 transition-colors"
                       >
                         {item.value}
                       </a>
                     ) : (
-                      <div className="font-medium text-gray-800">
+                      <div className="font-medium text-white">
                         {item.value}
                       </div>
                     )}
@@ -169,19 +226,19 @@ export default function Contact() {
 
             {/* Social links */}
             <div>
-              <h3 className="text-lg font-bold text-gray-800 mb-4">
+              <h3 className="text-lg font-bold text-white mb-4">
                 Find me online
               </h3>
               <div className="flex gap-3">
-                {/* GitHub */}
+                {/* GitHub - TODO: Replace with your actual URL */}
                 <a
                   href="https://github.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-4 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-800 hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out"
+                  className="group p-4 bg-gray-900 rounded-2xl shadow-sm border border-gray-800 hover:shadow-lg hover:border-gray-500 hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out"
                 >
                   <svg
-                    className="w-6 h-6 text-gray-600 group-hover:text-gray-800 group-hover:scale-110 transition-all duration-500"
+                    className="w-6 h-6 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all duration-500"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -189,15 +246,15 @@ export default function Contact() {
                   </svg>
                 </a>
 
-                {/* LinkedIn */}
+                {/* LinkedIn - TODO: Replace with your actual URL */}
                 <a
                   href="https://linkedin.com/in/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-4 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-500 hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out"
+                  className="group p-4 bg-gray-900 rounded-2xl shadow-sm border border-gray-800 hover:shadow-lg hover:border-gray-500 hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out"
                 >
                   <svg
-                    className="w-6 h-6 text-gray-600 group-hover:text-blue-600 group-hover:scale-110 transition-all duration-500"
+                    className="w-6 h-6 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all duration-500"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -205,15 +262,15 @@ export default function Contact() {
                   </svg>
                 </a>
 
-                {/* Twitter / X */}
+                {/* Twitter / X - TODO: Replace with your actual URL */}
                 <a
                   href="https://twitter.com/yourusername"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group p-4 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-800 hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out"
+                  className="group p-4 bg-gray-900 rounded-2xl shadow-sm border border-gray-800 hover:shadow-lg hover:border-gray-500 hover:-translate-y-2 hover:scale-105 transition-all duration-500 ease-out"
                 >
                   <svg
-                    className="w-6 h-6 text-gray-600 group-hover:text-gray-800 group-hover:scale-110 transition-all duration-500"
+                    className="w-6 h-6 text-gray-400 group-hover:text-white group-hover:scale-110 transition-all duration-500"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
@@ -224,8 +281,8 @@ export default function Contact() {
             </div>
 
             {/* Fun message */}
-            <div className="p-6 bg-gradient-to-br from-pastel-peach to-pastel-sky rounded-2xl">
-              <p className="text-gray-700 font-medium">
+            <div className="p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-gray-700">
+              <p className="text-gray-300 font-medium">
                 I'm always open to discussing new projects, creative ideas, or
                 opportunities to be part of your vision. Let's create something
                 amazing!

@@ -2,16 +2,16 @@
 
 @theme {
   --font-poppins: "Poppins", sans-serif;
-  --color-pastel-sky: #e0f2fe;
-  --color-pastel-purple: #f3e5f5;
-  --color-pastel-blue: #e8eaf6;
-  --color-pastel-mint: #e0f2f1;
-  --color-pastel-peach: #fff3e0;
-  --color-pastel-lavender: #ede7f6;
-  --color-primary: #7c3aed;
-  --color-primary-light: #a78bfa;
-  --color-secondary: #06b6d4;
-  --color-accent: #14b8a6;
+  --color-pastel-sky: #1a1a2e;
+  --color-pastel-purple: #12121a;
+  --color-pastel-blue: #1a1a2e;
+  --color-pastel-mint: #1a1a1a;
+  --color-pastel-peach: #1e1e1e;
+  --color-pastel-lavender: #1e1e28;
+  --color-primary: #e5e5e5;
+  --color-primary-light: #f5f5f5;
+  --color-secondary: #a3a3a3;
+  --color-accent: #737373;
 }
 
 html {
@@ -78,7 +78,111 @@ body {
   50% { opacity: 0.8; transform: scale(1.5); }
 }
 
+@keyframes ai-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+@keyframes ai-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.4), 0 0 20px rgba(99, 102, 241, 0.3); }
+  50% { box-shadow: 0 0 18px rgba(56, 189, 248, 0.7), 0 0 30px rgba(99, 102, 241, 0.5); }
+}
+
+@keyframes ai-network {
+  0% { opacity: 0.3; transform: translateX(0); }
+  50% { opacity: 0.75; transform: translateX(2px); }
+  100% { opacity: 0.3; transform: translateX(0); }
+}
+
+@keyframes data-stream {
+  0% { transform: translateY(12px); opacity: 0; }
+  50% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-12px); opacity: 0; }
+}
+
+@keyframes matrix-shimmer {
+  0% { color: #a6f2ff; text-shadow: 0 0 6px rgba(166,242,255,0.4), 0 0 10px rgba(99,102,241,0.35); }
+  50% { color: #e0f7ff; text-shadow: 0 0 18px rgba(166,242,255,0.8), 0 0 28px rgba(79,70,229,0.45); }
+  100% { color: #a6f2ff; text-shadow: 0 0 6px rgba(166,242,255,0.4), 0 0 10px rgba(99,102,241,0.35); }
+}
+
 .animate-blob-1 { animation: blob-drift-1 12s ease-in-out infinite; }
 .animate-blob-2 { animation: blob-drift-2 15s ease-in-out infinite; }
 .animate-blob-3 { animation: blob-drift-3 18s ease-in-out infinite; }
 .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+.animate-ai-pulse { animation: ai-pulse 2.8s ease-in-out infinite; }
+.animate-ai-glow { animation: ai-glow 4s ease-in-out infinite; }
+.animate-ai-network { animation: ai-network 5s ease-in-out infinite; }
+.animate-data-stream { animation: data-stream 1.8s ease-in-out infinite; }
+.animate-matrix-shimmer { animation: matrix-shimmer 2.5s ease-in-out infinite; }
+
+/* Robot animations */
+@keyframes robot-wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+
+@keyframes mouth-talk {
+  0%, 100% { height: 6px; y: 80; }
+  50% { height: 12px; y: 77; }
+}
+
+@keyframes robot-blink {
+  0%, 42%, 44%, 100% { ry: 5; }
+  43% { ry: 1; }
+}
+
+.robot-wave {
+  animation: robot-wave 1.2s ease-in-out infinite;
+}
+
+.robot-mouth {
+  animation: mouth-talk 0.4s ease-in-out infinite;
+}
+
+.robot-eyes circle:nth-child(even) {
+  animation: robot-blink 4s ease-in-out infinite;
+}
+
+/* Enhanced robot section animations */
+@keyframes robot-arm-wave {
+  0%, 100% { transform: rotate(-10deg); }
+  25% { transform: rotate(-35deg); }
+  50% { transform: rotate(-15deg); }
+  75% { transform: rotate(-40deg); }
+}
+
+@keyframes robot-hand-wave {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(15deg); }
+}
+
+@keyframes robot-particle-1 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+  50% { transform: translate(8px, -15px); opacity: 0.8; }
+}
+
+@keyframes robot-particle-2 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+  50% { transform: translate(-12px, -10px); opacity: 0.7; }
+}
+
+@keyframes robot-particle-3 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.35; }
+  50% { transform: translate(10px, 12px); opacity: 0.65; }
+}
+
+@keyframes circuit-flow {
+  0% { opacity: 0; transform: scaleX(0.3); }
+  50% { opacity: 1; transform: scaleX(1); }
+  100% { opacity: 0; transform: scaleX(0.3); }
+}
+
+.robot-arm-wave { animation: robot-arm-wave 1.8s ease-in-out infinite; }
+.robot-hand-wave { animation: robot-hand-wave 0.6s ease-in-out infinite; }
+.animate-robot-particle-1 { animation: robot-particle-1 4s ease-in-out infinite; }
+.animate-robot-particle-2 { animation: robot-particle-2 5s ease-in-out infinite; }
+.animate-robot-particle-3 { animation: robot-particle-3 6s ease-in-out infinite; }
+.animate-circuit-flow { animation: circuit-flow 4s ease-in-out infinite; }
+
