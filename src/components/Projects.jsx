@@ -205,7 +205,7 @@ function ProjectCard({ project, index }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-20 bg-gray-950">
+    <section id="projects" className="py-10 md:py-20 bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center mb-16" data-aos="fade-up">

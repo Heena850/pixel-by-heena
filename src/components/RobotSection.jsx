@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 const INTRO_TEXT =
   "Hi there! I'm Heena's robot assistant. She's a creative front-end developer who crafts pixel-perfect interfaces with React, Tailwind CSS, and AI-powered tools. Let me show you her amazing work!";
 
-function InteractiveRobot() {
+function InteractiveRobot({ speaking }) {
   const wrapperRef = useRef(null);
   const [headTilt, setHeadTilt] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -47,7 +47,7 @@ function InteractiveRobot() {
   return (
     <div
       ref={wrapperRef}
-      className="relative w-64 h-72 sm:w-72 sm:h-80 lg:w-80 lg:h-[22rem] mx-auto cursor-pointer"
+      className="relative w-44 h-52 sm:w-72 sm:h-80 lg:w-80 lg:h-[22rem] mx-auto cursor-pointer"
       style={{ perspective: "600px" }}
     >
       {/* Glow behind robot */}
@@ -120,7 +120,7 @@ function InteractiveRobot() {
           </g>
 
           {/* Mouth — animated speaking */}
-          <rect x="82" y="80" width="36" height="6" rx="3" className="fill-violet-400 robot-mouth" />
+          <rect x="82" y="80" width="36" height="6" rx="3" className={`fill-violet-400 ${speaking ? "robot-mouth" : ""}`} />
 
           {/* Ear indicators */}
           <circle cx="55" cy="60" r="3.5" fill="#1e1b4b" stroke="#6d28d9" strokeWidth="1.5" />
@@ -181,7 +181,6 @@ export default function RobotSection() {
   const [speaking, setSpeaking] = useState(false);
   const [activeWordIndex, setActiveWordIndex] = useState(-1);
   const wordTimerRef = useRef(null);
-  const hasSpokenRef = useRef(false);
 
   const startWordFill = () => {
     setActiveWordIndex(0);
@@ -205,24 +204,13 @@ export default function RobotSection() {
     setActiveWordIndex(WORDS.length); // fill all
   };
 
-  // Auto-speak once after page loads
+  // Cancel speech on page reload/unmount
   useEffect(() => {
-    if (hasSpokenRef.current) return;
-    hasSpokenRef.current = true;
-
-    const timer = setTimeout(() => {
-      const utterance = new SpeechSynthesisUtterance(INTRO_TEXT);
-      utterance.rate = 0.95;
-      utterance.pitch = 1.1;
-      utterance.onend = () => { setSpeaking(false); stopWordFill(); };
-      utterance.onerror = () => { setSpeaking(false); stopWordFill(); };
-      window.speechSynthesis.speak(utterance);
-      setSpeaking(true);
-      startWordFill();
-    }, 800);
-
+    const onBeforeUnload = () => window.speechSynthesis.cancel();
+    window.addEventListener("beforeunload", onBeforeUnload);
     return () => {
-      clearTimeout(timer);
+      window.removeEventListener("beforeunload", onBeforeUnload);
+      window.speechSynthesis.cancel();
       if (wordTimerRef.current) clearInterval(wordTimerRef.current);
     };
   }, []);
@@ -249,7 +237,7 @@ export default function RobotSection() {
   return (
     <section
       id="robot"
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 via-[#0c0a1a] to-gray-950 py-20 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 via-[#0c0a1a] to-gray-950  py-10 md:py-20 overflow-hidden"
     >
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
@@ -299,11 +287,11 @@ export default function RobotSection() {
           </h2>
         </div>
 
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-4 sm:gap-6">
           {/* Speech Bubble */}
           <div className="relative max-w-lg w-full" data-aos="fade-down" data-aos-delay="300">
-            <div className="bg-gray-900/80 backdrop-blur-md border border-violet-500/20 rounded-2xl px-6 py-5 shadow-lg shadow-violet-500/5">
-              <p className="text-base sm:text-lg leading-relaxed min-h-[3rem]">
+            <div className="bg-gray-900/80 backdrop-blur-md border border-violet-500/20 rounded-2xl px-4 py-3 sm:px-6 sm:py-5 shadow-lg shadow-violet-500/5">
+              <p className="text-sm sm:text-base lg:text-lg leading-snug sm:leading-relaxed min-h-[2.5rem] sm:min-h-[3rem]">
                 {WORDS.map((word, i) => (
                   <span
                     key={i}
@@ -324,14 +312,14 @@ export default function RobotSection() {
 
           {/* Robot */}
           <div data-aos="zoom-in" data-aos-delay="500">
-            <InteractiveRobot />
+            <InteractiveRobot speaking={speaking} />
           </div>
 
           {/* Action buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4" data-aos="fade-up" data-aos-delay="700">
+          <div className="flex flex-row items-center gap-3 sm:gap-4" data-aos="fade-up" data-aos-delay="700">
             <button
               onClick={handleSpeak}
-              className={`group flex items-center gap-2.5 px-8 py-3.5 font-semibold rounded-full shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer ${
+              className={`group flex items-center gap-2 sm:gap-2.5 px-5 py-2.5 sm:px-8 sm:py-3.5 text-sm sm:text-base font-semibold rounded-full shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer ${
                 speaking
                   ? "bg-gradient-to-r from-cyan-600 to-blue-500 text-white shadow-cyan-500/25"
                   : "bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white shadow-violet-500/25 hover:shadow-xl hover:shadow-violet-500/35"
@@ -356,7 +344,7 @@ export default function RobotSection() {
 
             <a
               href="#projects"
-              className="px-8 py-3.5 bg-gray-800/60 backdrop-blur-sm text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 border border-gray-700 hover:border-violet-500/30"
+              className="px-5 py-2.5 sm:px-8 sm:py-3.5 text-sm sm:text-base bg-gray-800/60 backdrop-blur-sm text-white font-semibold rounded-full shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 border border-gray-700 hover:border-violet-500/30"
             >
               See Her Work
             </a>

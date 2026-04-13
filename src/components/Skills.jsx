@@ -118,7 +118,7 @@ function SkillCard({ skill, index }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">
+    <section id="skills" className="py-10 md:py-20 bg-gradient-to-b from-gray-900 to-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <div className="text-center mb-16" data-aos="fade-up">
