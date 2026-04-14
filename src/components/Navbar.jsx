@@ -91,7 +91,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden transition-opacity h-dvh duration-300 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setIsOpen(false)}
@@ -99,7 +99,7 @@ export default function Navbar() {
 
       {/* Mobile menu panel — slides from right */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 bg-gray-950/95 backdrop-blur-xl z-50 md:hidden transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-dvh w-72 bg-gray-950/95 backdrop-blur-xl z-50 md:hidden transition-transform duration-300 ease-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
