@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import resumePdf from "../assets/resume.pdf";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -6,6 +7,7 @@ const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
+  { label: "Resume", href: resumePdf, external: true },
 ];
 
 export default function Navbar() {
@@ -42,6 +44,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
+                {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   scrolled
                     ? "text-gray-400 hover:text-white hover:bg-gray-800"
@@ -123,6 +126,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
+              {...(link.external && { target: "_blank", rel: "noopener noreferrer" })}
               className="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:text-white hover:bg-violet-500/10 border border-transparent hover:border-violet-500/20 transition-all duration-300"
               style={{
                 transitionDelay: isOpen ? `${i * 50}ms` : "0ms",
