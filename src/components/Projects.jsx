@@ -7,22 +7,7 @@ import partspracticeImg from "../assets/partspractice.webp";
 import modenxImg from "../assets/modenx.webp";
 
 const projects = [
-   {
-    title: "Smart Stocks",
-    image: smartstocksImg,
-    description:
-      "The Portfolio Management platform is a full-stack web application designed to help users efficiently manage stock portfolios, track real-time profit and loss, and analyze overall market performance.",
-    tags: ["HTML5", "CSS3", "React", "MySQL", "Node.js"],
-    category: "Lovabel, React",
-    color: "from-gray-700 to-gray-600",
-    icon: (
-      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-      </svg>
-    ),
-    github: "#",
-    demo: "http://3.137.162.241/",
-  },
+   
   {
     title: "Collegeease",
     image: clgeaseImg,
