@@ -7,7 +7,6 @@ import partspracticeImg from "../assets/partspractice.webp";
 import modenxImg from "../assets/modenx.webp";
 
 const projects = [
-   
   {
     title: "Collegeease",
     image: clgeaseImg,
